@@ -1,0 +1,123 @@
+#!/bin/sh
+set -euf
+
+## Program Tracking
+
+program_command="port-to-process"
+program_version="4.0.0"
+program_updated="2018-07-12"
+program_license="GPL"
+program_contact="Joel Parker Henderson (http://joelparkerhenderson.com)"
+
+## Help Function
+
+help(){
+cat << EOF
+
+port-to-process
+
+Given a system port number, show what proccess is running on the port.
+
+Syntax:
+
+    port-to-process <port number>
+
+Example:
+
+    port-to-process 80
+
+
+## Implementation
+
+This program aims to run on a wide variety of current Unix systems:
+
+  * Debian, Ubuntu, Mint, etc.
+  * RedHat, Fedora, CentOS, etc.
+  * macOS
+
+This program looks up the port information using a variety of commands:
+
+  * ss
+  * lsof
+  * netstat
+  * sockstat
+  * fuser
+
+
+## Tracking
+
+  * Command: $program_command
+  * Version: $program_version
+  * Updated: $program_updated
+  * License: $program_license
+  * Contact: $program_contact
+EOF
+}
+
+cmd() { command -v $1 >/dev/null 2>&1 ; };
+int() { printf -v int '%d\n' "$1" 2>/dev/null ; };
+
+if [ "$#" -eq 0 ]; then
+    help; exit 0
+fi
+
+if [ "$#" -eq 1 ]; then
+  case "$1" in
+    -h|--help)
+      help; exit 0
+      ;;
+    -v|--version)
+      out $program_version; exit 0
+      ;;
+  esac
+fi
+
+port="$1"
+os=$(uname)
+
+if $(cmd "ss"); then
+    case "$os" in
+	*)
+	    ( set -x; sudo ss -lptn 'sport = :$port' )
+	    ;;
+    esac
+fi
+
+if $(cmd "lsof"); then
+    case "$os" in
+	*)
+	    ( set -x; sudo lsof -n -i :$port )
+    esac
+fi
+
+if $(cmd "netstat"); then
+    case "$os" in
+	"Darwin")
+	    :
+	    ;;
+	*)
+	    ( set -x; sudo netstat --numeric --listening --program | grep "[^[:digit:]]80[^[:digit:]]" )
+	    ;;
+    esac
+fi
+
+if $(cmd "fuser"); then
+    case "$os" in
+	"Darwin")
+	    :
+	    ;;
+	*)
+	    ( set -x; fuser -v -n tcp $port )
+	    ;;
+    esac
+fi
+
+if $(cmd "sockstat"); then
+    case "$os" in
+	*)
+	    ( set -x; sockstat -4 -l | grep ":$port[^[:digit:]]" | awk '{print $3}' | head -1 )
+	    ;;
+    esac
+fi
+
+exit 0
