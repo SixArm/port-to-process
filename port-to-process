@@ -4,8 +4,8 @@ set -euf
 ## Program Tracking
 
 program_command="port-to-process"
-program_version="4.0.0"
-program_updated="2018-07-12"
+program_version="4.0.2"
+program_updated="2018-07-13"
 program_license="GPL"
 program_contact="Joel Parker Henderson (http://joelparkerhenderson.com)"
 
@@ -86,7 +86,7 @@ fi
 if $(cmd "lsof"); then
     case "$os" in
 	*)
-	    ( set -x; sudo lsof -n -i :$port )
+	    ( set -x; sudo lsof -i4TCP:$port -sTCP:LISTEN -t )
     esac
 fi
 

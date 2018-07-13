@@ -35,7 +35,7 @@ This program looks up the port information using a variety of commands such as:
 ## Tracking
 
   * Command: port-to-process
-  * Version: 4.0.1
-  * Updated: 2018-07-12
+  * Version: 4.0.2
+  * Updated: 2018-07-13
   * License: GPL
   * Contact: Joel Parker Henderson (http://joelparkerhenderson.com)
