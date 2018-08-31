@@ -13,19 +13,21 @@ Example:
 
 ## Install
 
-Example 1: download the script to wherever you want, then make it executable.
+Option 1: download the file to wherever you want, then make it executable.
 
     cd /usr/local/bin/
     sudo curl -O https://raw.githubusercontent.com/SixArm/port-to-process/master/port-to-process
     sudo chmod +x port-to-process
 
-Example 2: clone the repo to wherever you want, then add it to your path.
+Option 2: clone the repo to anywhere you want, then add it to your path.
 
-    cd /foo/bar
+    cd /anywhere/you/want
     git clone https://github.com/SixArm/port-to-process.git   
-    export PATH=$PATH:/wherever/port-to-process
-    
-    
+    export PATH="$PATH:/wherever/port-to-process"
+
+If you would like to help us by writing a package for any popular package manager, such as apt, yum, brew, etc., we wecome help.
+
+
 ## Implementation
 
 This program aims to run on a wide variety of current Unix systems:
