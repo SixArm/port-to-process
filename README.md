@@ -23,7 +23,7 @@ Option 2: clone the repo to anywhere you want, then add it to your path.
 
     cd /anywhere/you/want
     git clone https://github.com/SixArm/port-to-process.git   
-    export PATH="$PATH:/wherever/port-to-process"
+    export PATH="$PATH:/anywhere/you/want/port-to-process"
 
 If you would like to help us by writing a package for any popular package manager, such as apt, yum, brew, etc., we wecome help.
 
