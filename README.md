@@ -11,6 +11,21 @@ Example:
     port-to-process 80
 
 
+## Install
+
+Example 1: download the script to wherever you want, then make it executable.
+
+    cd /usr/local/bin/
+    sudo curl -O https://raw.githubusercontent.com/SixArm/port-to-process/master/port-to-process
+    sudo chmod +x port-to-process
+
+Example 2: clone the repo to wherever you want, then add it to your path.
+
+    cd /foo/bar
+    git clone https://github.com/SixArm/port-to-process.git   
+    export PATH=$PATH:/wherever/port-to-process
+    
+    
 ## Implementation
 
 This program aims to run on a wide variety of current Unix systems:
