@@ -4,8 +4,8 @@ set -euf
 ## Program Tracking
 
 program_command="port-to-process"
-program_version="4.0.3"
-program_updated="2018-07-24"
+program_version="4.1.0"
+program_updated="2018-11-21"
 program_license="GPL"
 program_contact="Joel Parker Henderson (http://joelparkerhenderson.com)"
 
@@ -20,7 +20,7 @@ Given a system port number, show what proccess is running on the port.
 
 Syntax:
 
-    port-to-process <port number>
+    port-to-process <port number> ...
 
 Example:
 
@@ -72,13 +72,16 @@ if [ "$#" -eq 1 ]; then
   esac
 fi
 
-port="$1"
 os=$(uname)
 
 if $(cmd "ss"); then
     case "$os" in
 	*)
-	    ( set -x; sudo ss -lptn "sport = :$port" )
+	    set +e
+	    for port in $ports; do
+		( set -x; sudo ss -lptn "sport = :$port" )
+	    done
+	    set -e
 	    ;;
     esac
 fi
@@ -86,7 +89,11 @@ fi
 if $(cmd "lsof"); then
     case "$os" in
 	*)
-	    ( set -x; sudo lsof -i4TCP:$port -sTCP:LISTEN -t )
+	    set +e
+	    for port in "$@"; do
+		( set -x; sudo lsof -i4TCP:$port -sTCP:LISTEN -t );
+	    done
+	    set -e
     esac
 fi
 
@@ -96,7 +103,11 @@ if $(cmd "netstat"); then
 	    :
 	    ;;
 	*)
-	    ( set -x; sudo netstat --numeric --listening --program | grep "[^[:digit:]]80[^[:digit:]]" )
+	    set +e
+	    for port in $ports; do
+		( set -x; sudo netstat --numeric --listening --program | grep "[^[:digit:]]80[^[:digit:]]" )
+	    done
+	    set -e
 	    ;;
     esac
 fi
@@ -107,7 +118,11 @@ if $(cmd "fuser"); then
 	    :
 	    ;;
 	*)
-	    ( set -x; fuser -v -n tcp $port )
+	    set +e
+	    for port in $ports; do
+		( set -x; fuser -v -n tcp $port )
+	    done
+	    set -e
 	    ;;
     esac
 fi
@@ -115,7 +130,11 @@ fi
 if $(cmd "sockstat"); then
     case "$os" in
 	*)
-	    ( set -x; sockstat -4 -l | grep ":$port[^[:digit:]]" | awk '{print $3}' | head -1 )
+	    set +e
+	    for port in $ports; do
+		( set -x; sockstat -4 -l | grep ":$port[^[:digit:]]" | awk '{print $3}' | head -1 )
+	    done
+	    set -e
 	    ;;
     esac
 fi

@@ -4,7 +4,7 @@ Given a system port number, show what proccess is running on the port.
 
 Syntax:
 
-    port-to-process <port number>
+    port-to-process <port number> ...
 
 Example:
 
@@ -52,7 +52,7 @@ This program looks up the port information using a variety of commands such as:
 ## Tracking
 
   * Command: port-to-process
-  * Version: 4.0.2
-  * Updated: 2018-07-13
+  * Version: 4.1.0
+  * Updated: 2018-11-21
   * License: GPL
   * Contact: Joel Parker Henderson (http://joelparkerhenderson.com)
