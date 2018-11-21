@@ -10,6 +10,10 @@ Example:
 
     port-to-process 80
 
+Example to check ports for SSH, HTTP, IRC
+
+    port-to-process 22 80 194
+
 
 ## Install
 
