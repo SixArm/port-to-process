@@ -58,5 +58,5 @@ This program looks up the port information using a variety of commands such as:
   * Command: port-to-process
   * Version: 4.1.0
   * Updated: 2018-11-21
-  * License: GPL
+  * License: GPL-2.0 or GPL-3.0 or contact us for custom.
   * Contact: Joel Parker Henderson (http://joelparkerhenderson.com)
