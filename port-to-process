@@ -16,7 +16,7 @@ cat << EOF
 
 port-to-process
 
-Given a system port number, show what proccess is listening on the port.
+Given a system port number, show what proccess are listening on the port.
 
 Syntax:
 
@@ -29,6 +29,10 @@ Example:
 Example to check ports for SSH, HTTP, IRC
 
     port-to-process 22 80 194
+
+Example to kill port processes:
+
+    port-to-process 80 | xargs kill -9
 
 
 ## Implementation

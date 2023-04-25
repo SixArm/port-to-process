@@ -1,18 +1,30 @@
 # port-to-process
 
-Given a system port number, show what proccess is listening on the port.
+Given a system port number, show what proccesses are listening on the port.
 
 Syntax:
 
-    port-to-process <port number> ...
+```sh
+port-to-process <port number> ...
+```
 
 Example:
 
-    port-to-process 80
+```sh
+port-to-process 80
+```
 
-Example to check ports for SSH, HTTP, IRC
+Example to check ports for SSH, HTTP, IRC:
 
-    port-to-process 22 80 194
+```sh
+port-to-process 22 80 194
+```
+
+Example to kill port processes:
+
+```sh
+port-to-process 80 | xargs kill -9
+```
 
 
 ## Install
