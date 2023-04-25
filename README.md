@@ -1,6 +1,6 @@
 # port-to-process
 
-Given a system port number, show what proccess is running on the port.
+Given a system port number, show what proccess is listening on the port.
 
 Syntax:
 
@@ -56,7 +56,7 @@ This program looks up the port information using a variety of commands such as:
 ## Tracking
 
   * Command: port-to-process
-  * Version: 4.1.0
-  * Updated: 2018-11-21
-  * License: GPL-2.0 or GPL-3.0 or contact us for custom.
+  * Version: 4.1.1
+  * Updated: 2023-04-25T11:13:34Z
+  * License: GPL-2.0 or GPL-3.0 or contact us for custom
   * Contact: Joel Parker Henderson (http://joelparkerhenderson.com)
